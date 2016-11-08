@@ -20,6 +20,7 @@ import fnmatch
 import locale
 import os.path
 from six.moves import input
+import re
 
 
 def wrap_stream(stream, encoding='utf-8'):
@@ -68,3 +69,6 @@ def recurse_path(root, excludes=None):
 def confirm(question):
     answer = input('%s (Y/N): ' % question).upper().strip()
     return answer == 'Y'
+
+def escape_braces(data):
+    return re.sub(r'({|})', r'\1\1', data)

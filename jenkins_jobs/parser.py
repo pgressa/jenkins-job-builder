@@ -349,6 +349,7 @@ class YamlParser(object):
 
         for values in itertools.product(*dimensions):
             params = copy.deepcopy(project)
+            params['template-name'] = utils.escape_braces(template_name)
             params = self._applyDefaults(params, template)
 
             try:
@@ -390,7 +391,6 @@ class YamlParser(object):
                 if key not in params:
                     params[key] = template[key]
 
-            params['template-name'] = template_name
             try:
                 expanded = deep_format(
                     template, params,

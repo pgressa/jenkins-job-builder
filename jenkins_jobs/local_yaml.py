@@ -159,6 +159,9 @@ from yaml import YAMLObject
 from collections import OrderedDict
 
 
+from jenkins_jobs import utils
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -289,7 +292,7 @@ class LocalLoader(OrderedConstructor, LocalAnchorLoader):
         self.search_path.append(os.path.normpath(os.path.curdir))
 
     def _escape(self, data):
-        return re.sub(r'({|})', r'\1\1', data)
+        return utils.escape_braces(data)
 
     def __deepcopy__(self, memo):
         """
